@@ -77,7 +77,7 @@ class TaskEmailToAssigned extends Base
      */
     public function doAction(array $data)
     {
-        $userId = $data['task']['task_assignee_id'];
+        $userId = $data['task']['owner_id'];
         
         if($userId == null ) {
             return false;
@@ -93,7 +93,7 @@ class TaskEmailToAssigned extends Base
                 $user['email'],
                 $user['name'] ?: $user['username'],
                 $this->getParam('subject'),
-                $this->template->render('notification/task_create', array(
+                $this->template->render('notification/task_move_column', array(
                     'task' => $data['task'],
                 ))
             );
